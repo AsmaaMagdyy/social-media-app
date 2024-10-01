@@ -1,0 +1,83 @@
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a routerLink="/timeline" class="flex items-center space-x-3 rtl:space-x-reverse">
+
+      <span class="self-center text-2xl font-semibold whitespace-nowrap text-blue-700 dark:text-white">Linked
+        Posts</span>
+    </a>
+    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+      <button type="button" data-tooltip-target="tooltip-bottom3" data-tooltip-placement="bottom"
+        class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+        id="user-menu-button" aria-expanded="false">
+        <span class="sr-only">Open user menu</span>
+        @if(userAccountPhoto()){
+        <img class="w-12 h-12 rounded-full" [src]=" userAccountPhoto()" alt="user photo" routerLink="/account">
+        }@else {
+        <img class="w-12 h-12 rounded-full" src="./assets/images/mr-anonymous_230x230.png" alt="user photo"
+          routerLink="/account">
+        }
+
+
+        <div id="tooltip-bottom3" role="tooltip"
+          class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-blue-700 border-2 bg-blue-100 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          Account
+          <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+      </button>
+
+      <button data-collapse-toggle="navbar-user" type="button"
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        aria-controls="navbar-user" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M1 1h15M1 7h15M1 13h15" />
+        </svg>
+      </button>
+    </div>
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 text-center" id="navbar-user">
+      <ul
+        class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        
+        <li>
+          <a routerLink="/timeline"
+            class="block  rounded-md bg-transparent text-blue-700 md:p-0 md:dark:text-blue-500 hover:bg-gray-50"
+            aria-current="page" data-tooltip-target="tooltip-bottom" data-tooltip-placement="bottom"><i
+              routerLinkActive=" bg-blue-50 rounded-md" class="fa-solid fa-house fa-2xl px-6 py-5"></i></a>
+
+          <div id="tooltip-bottom" role="tooltip"
+            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-blue-700 border-2 bg-blue-100 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+            Timeline
+            <div class="tooltip-arrow" data-popper-arrow></div>
+          </div>
+        </li>
+        <li>
+          <a routerLink="/myPosts"
+            class="block  rounded-md bg-transparent text-blue-700 md:p-0 md:dark:text-blue-500 hover:bg-gray-50"
+            aria-current="page" data-tooltip-target="tooltip-bottom2" data-tooltip-placement="bottom"><i
+              routerLinkActive=" bg-blue-50 rounded-md" class="fa-solid fa-newspaper fa-2xl px-6 py-5"></i></a>
+
+
+          <div id="tooltip-bottom2" role="tooltip"
+            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-blue-700 border-2 bg-blue-100 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+            My Posts
+            <div class="tooltip-arrow" data-popper-arrow></div>
+          </div>
+        </li>
+        <li>
+          <a (click)="confirmSignOut()"
+            class="cursor-pointer block  rounded-md bg-transparent text-blue-700 md:p-0 md:dark:text-blue-500 hover:bg-gray-50"
+            aria-current="page" data-tooltip-target="tooltip-bottom4" data-tooltip-placement="bottom">
+            <i routerLinkActive=" bg-blue-50 rounded-md"  class="fa-solid fa-arrow-right-from-bracket fa-2xl px-6 py-5"></i></a>
+
+          <div id="tooltip-bottom4" role="tooltip"
+            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-blue-700 border-2 bg-blue-100 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+            Signout
+            <div class="tooltip-arrow" data-popper-arrow></div>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
