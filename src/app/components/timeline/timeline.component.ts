@@ -37,10 +37,13 @@ export class TimelineComponent implements OnInit, OnDestroy {
   savedFile!: File;
   content!:string;
   userID!:string;
-
+  numberOfPages!:number
+  currentPage!:number
+  i:number=1;
   ngOnInit(): void {
 
     this.getAllPosts();
+
     this.getUserDataSubs = this._UsersService.getUserData().subscribe({
       next: (res) => {
         console.log(res.user.name);
@@ -55,13 +58,22 @@ export class TimelineComponent implements OnInit, OnDestroy {
     }
   }
 
-  getAllPosts(): void {
-    this.getAllPostsSubs = this._PostsService.getAllPosts().subscribe({
+  getAllPosts(page?:number): void {
+    this.getAllPostsSubs = this._PostsService.getAllPosts(page).subscribe({
       next: (res) => {
         console.log(res.posts);
-        this.posts = res.posts;
+        this.posts = [...this.posts,... res.posts];
+        this.numberOfPages=res.paginationInfo.numberOfPages;
+        this.currentPage=res.paginationInfo.currentPage;
+       
+
       }
     })
+  }
+  
+  getNextPage(currPage:number):void{
+    this.i=this.i+1;
+    this.getAllPosts(currPage);
   }
 
   changeImage(e: Event): void {
@@ -126,6 +138,7 @@ export class TimelineComponent implements OnInit, OnDestroy {
       }
     })
   }
+  
 
   ngOnDestroy(): void {
     this.getAllPostsSubs?.unsubscribe();

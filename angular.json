@@ -30,6 +30,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/animate.css",
               "./node_modules/ngx-spinner/animations/ball-scale-ripple-multiple.css",
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.scss",

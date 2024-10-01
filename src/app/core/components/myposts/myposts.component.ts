@@ -5,36 +5,46 @@ import { PostsService } from '../../services/posts.service';
 import { Ipost } from '../../interfaces/ipost';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-myposts',
   standalone: true,
-  imports: [CommentsComponent,DatePipe],
+  imports: [CommentsComponent,DatePipe,RouterLink],
   templateUrl: './myposts.component.html',
   styleUrl: './myposts.component.scss'
 })
 export class MypostsComponent implements OnInit,OnDestroy {
 
   private readonly _PostsService = inject(PostsService);
-  private readonly _Router = inject(Router);
   posts:WritableSignal< Ipost[]> = signal([]);
   getMyPostsSubs!:Subscription;
   deletePostSubs!:Subscription;
-
+  
+  numberOfPages!:number
+  currentPage!:number
+  i:number=1;
 
   ngOnInit(): void {
     this.getMyPosts();
   }
-  getMyPosts():void{
-    this.getMyPostsSubs=this._PostsService.getMyPosts().subscribe({
+  getMyPosts(page?:number):void{
+    this.getMyPostsSubs=this._PostsService.getMyPosts(page).subscribe({
       next:(res)=>{
-        console.log(res.posts);
-        this.posts.set(res.posts.reverse());
+        console.log(res.posts); 
+        this.posts .set( [...this.posts(),... res.posts.reverse()]);
+        this.numberOfPages=res.paginationInfo.numberOfPages;
+        this.currentPage=res.paginationInfo.currentPage;
+       
         
       }
     })
+  }
+
+  getNextPage(currPage:number):void{
+    this.i=this.i+1;
+    this.getMyPosts(currPage);
   }
 
   deletePost(postId:string):void{
@@ -71,12 +81,7 @@ export class MypostsComponent implements OnInit,OnDestroy {
       }
     })
   }
-  getPost(postId:string):void{
-    console.log(postId);
-    this._Router.navigate(['/myPost',postId]);
 
-    
-  }
   ngOnDestroy(): void {
     this.getMyPostsSubs?.unsubscribe();
     this.deletePostSubs?.unsubscribe();

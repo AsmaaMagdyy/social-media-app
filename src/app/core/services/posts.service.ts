@@ -14,12 +14,27 @@ export class PostsService {
     return this._HttpClient.post(`${environment.baseUrl}posts`,data);
   }
 
-  getAllPosts():Observable<any>{
-    return this._HttpClient.get(`${environment.baseUrl}posts?limit=50`);
+  getAllPosts(currentPage?:number):Observable<any>{
+    let url;
+    if (currentPage) {
+      url= this._HttpClient.get(`${environment.baseUrl}posts?page=${currentPage}`);
+    }else{
+      url= this._HttpClient.get(`${environment.baseUrl}posts?`);
+    }
+    
+
+    return url;
   }
 
-  getMyPosts():Observable<any>{
-    return this._HttpClient.get(`${environment.baseUrl}users/664bcf3e33da217c4af21f00/posts`);
+  getMyPosts(currentPage?:number):Observable<any>{
+    let url;
+    if (currentPage) {
+      url=this._HttpClient.get(`${environment.baseUrl}users/664bcf3e33da217c4af21f00/posts?page=${currentPage}?limit=`);
+    }else{
+      url=this._HttpClient.get(`${environment.baseUrl}users/664bcf3e33da217c4af21f00/posts`);
+
+    }
+    return url;
   }
 
  getSinglePost(postID:string|null):Observable<any>{
