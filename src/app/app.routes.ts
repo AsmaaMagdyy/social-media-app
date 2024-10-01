@@ -12,7 +12,7 @@ import { SinglePostComponent } from './components/single-post/single-post.compon
 
 export const routes: Routes = [
     {path:'',component:AuthlayoutComponent,canActivate:[logedguardGuard],children:[
-        {path:'',redirectTo:'login',pathMatch:'full'},
+        {path:'',redirectTo:'register',pathMatch:'full'},
         {path:'login',component:LoginComponent,title:'login'},
         {path:'register',component:RegisterComponent,title:'register'},
     ]},
