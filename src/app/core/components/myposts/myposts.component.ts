@@ -18,34 +18,31 @@ import { RouterLink } from '@angular/router';
 export class MypostsComponent implements OnInit,OnDestroy {
 
   private readonly _PostsService = inject(PostsService);
+  
   posts:WritableSignal< Ipost[]> = signal([]);
   getMyPostsSubs!:Subscription;
   deletePostSubs!:Subscription;
   
-  numberOfPages!:number
-  currentPage!:number
-  i:number=1;
+  
 
   ngOnInit(): void {
     this.getMyPosts();
   }
+
+
   getMyPosts(page?:number):void{
     this.getMyPostsSubs=this._PostsService.getMyPosts(page).subscribe({
       next:(res)=>{
         console.log(res.posts); 
-        this.posts .set( [...this.posts(),... res.posts.reverse()]);
-        this.numberOfPages=res.paginationInfo.numberOfPages;
-        this.currentPage=res.paginationInfo.currentPage;
+        this.posts.set(res.posts.reverse());
+        
        
         
       }
     })
   }
 
-  getNextPage(currPage:number):void{
-    this.i=this.i+1;
-    this.getMyPosts(currPage);
-  }
+ 
 
   deletePost(postId:string):void{
     this.deletePostSubs=this._PostsService.deletePost(postId).subscribe({

@@ -29,9 +29,9 @@ export class PostsService {
   getMyPosts(currentPage?:number):Observable<any>{
     let url;
     if (currentPage) {
-      url=this._HttpClient.get(`${environment.baseUrl}users/664bcf3e33da217c4af21f00/posts?page=${currentPage}?limit=`);
+      url=this._HttpClient.get(`${environment.baseUrl}users/664bcf3e33da217c4af21f00/posts?page=${currentPage}`);
     }else{
-      url=this._HttpClient.get(`${environment.baseUrl}users/664bcf3e33da217c4af21f00/posts`);
+      url=this._HttpClient.get(`${environment.baseUrl}users/664bcf3e33da217c4af21f00/posts?`);
 
     }
     return url;

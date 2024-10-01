@@ -36,24 +36,10 @@
         }
 
     </article>
-    }@empty {
-        <h1 class="text-3xl font-medium text-center">There are no posts yet.</h1>
+    }@empty{
+        <h1 class="text-center font-medium text-3xl">There are no posts yet <i class="fa-solid fa-pen-to-square"></i></h1>
     }
 
-    @if (currentPage < numberOfPages) {
-        @defer(on viewport(end)){
-            
-                <div class="text-center animate__animated animate__pulse animate__infinite infinite" >
-                <i class="fa-regular fa-hand-pointer text-lg text-blue-950 me-1"></i><button class="font-medium text-center mt-2 hover:underline" (click)="getNextPage(currentPage+i)">Press for loading more posts <i class="fa-regular fa-hand-pointer text-lg text-blue-950"></i></button>
-                </div>
-            
-            
-        }
-    
-        <div class="text-3xl text-center">
-            <i #end class="fa-solid fa-spinner fa-spin-pulse"></i>
-        </div>
-    
-    }
+  
    
 </main>
